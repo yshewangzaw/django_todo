@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Todo List</h1>
+<a href="{% url 'create' %}">Create New Todo</a>
+<ul>
+    {% for todo in todos %}
+    <li>
+        {% if todo.is_completed %}
+        <s>{{ todo.title }}</s>
+        {% else %}
+        {{ todo.title }}
+        {% endif %}
+        - {{ todo.description }}
+        <a href="{% url 'toggle_complete' todo.id %}">{% if todo.is_completed %}Mark as Incomplete{% else %}Mark as
+            Complete{% endif %}</a>
+        <a href="{% url 'delete' todo.id %}">Delete</a>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
